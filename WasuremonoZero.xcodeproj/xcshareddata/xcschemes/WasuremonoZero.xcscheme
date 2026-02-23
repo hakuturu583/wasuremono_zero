@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A1B2C3D41E00000200000040"
+               BuildableName = "WasuremonoZeroUITests.xctest"
+               BlueprintName = "WasuremonoZeroUITests"
+               ReferencedContainer = "container:WasuremonoZero.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "A1B2C3D41E00000100000040"
+            BuildableName = "WasuremonoZero.app"
+            BlueprintName = "WasuremonoZero"
+            ReferencedContainer = "container:WasuremonoZero.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -76,3 +95,4 @@
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
+
