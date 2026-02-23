@@ -1,0 +1,55 @@
+name: Feature request
+description: Suggest an idea or enhancement
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: Help us scope and validate the feature.
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      placeholder: Ex. Add quiet hours setting for notifications
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: What user need/pain does this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Include UX notes, settings, data model, and edge cases
+      placeholder: |
+        - UI: toggle and time range in Settings
+        - Persistence: UserDefaults keys
+        - Policy: suppress notifications during range
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - Given X, when Y, then Z
+        - Telemetry or tests proving behavior
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area(s)
+      multiple: true
+      options:
+        - Location
+        - Notifications
+        - MovementPolicy
+        - UI
+        - Persistence
+        - CI/Build

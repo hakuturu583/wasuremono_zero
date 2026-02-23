@@ -1,0 +1,70 @@
+name: Bug report
+description: File a bug for Wasuremono Zero (iOS)
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please provide clear, reproducible details.
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: One-sentence description of the bug
+      placeholder: Ex. Notification actions don’t appear after SLC event
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Numbered steps to trigger the issue
+      placeholder: |
+        1. Launch app and allow permissions
+        2. Move 300m to trigger SLC
+        3. Observe notification
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area(s)
+      multiple: true
+      options:
+        - Location
+        - Notifications
+        - MovementPolicy
+        - UI
+        - Persistence
+        - CI/Build
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: iOS 17.4, iPhone 15, Xcode 15.3, Debug
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / diagnostics
+      description: Relevant Xcode logs, stack traces, or screenshots
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I reproduced this on the latest main
+          required: true
+        - label: I attached logs or screenshots when possible
+          required: false
