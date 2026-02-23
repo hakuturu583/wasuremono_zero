@@ -1,23 +1,34 @@
 import CoreLocation
 import SwiftUI
+import UIKit
 
 @main
 struct WasuremonoZeroApp: App {
-    @StateObject private var appCoordinator = AppCoordinator()
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .task {
-                    appCoordinator.start()
-                }
         }
     }
 }
 
-final class AppCoordinator: NSObject, ObservableObject {
+final class AppDelegate: NSObject, UIApplicationDelegate {
+    private let appCoordinator = AppCoordinator()
+
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+    ) -> Bool {
+        appCoordinator.start()
+        return true
+    }
+}
+
+final class AppCoordinator: NSObject {
     private let notificationService: NotificationService
     private let locationService: LocationService
+    private var hasStarted = false
 
     override init() {
         let notificationService = NotificationService()
@@ -31,6 +42,11 @@ final class AppCoordinator: NSObject, ObservableObject {
     }
 
     func start() {
+        guard hasStarted == false else {
+            return
+        }
+
+        hasStarted = true
         notificationService.configureCategories()
         locationService.requestPermissions()
         startLocationMonitoringIfAuthorized()
