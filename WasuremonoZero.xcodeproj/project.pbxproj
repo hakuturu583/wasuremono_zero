@@ -13,6 +13,9 @@
 		A1B2C3D41E00000100000008 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E00000100000009 /* NotificationService.swift */; };
 		A1B2C3D41E0000010000000A /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E0000010000000B /* LocationService.swift */; };
 		A1B2C3D41E0000010000000C /* MovementPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E0000010000000D /* MovementPolicy.swift */; };
+		A1B2C3D41E0000010000000E /* CheckItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E0000010000000F /* CheckItem.swift */; };
+		A1B2C3D41E00000100000011 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E00000100000012 /* AppSettings.swift */; };
+		A1B2C3D41E00000100000013 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E00000100000014 /* SettingsStore.swift */; };
 /* UI Tests build file */
 		A1B2C3D41E00000200000001 /* UIScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E00000200000004 /* UIScreenshotTests.swift */; };
 /* End PBXBuildFile section */
@@ -26,6 +29,9 @@
 		A1B2C3D41E00000100000009 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		A1B2C3D41E0000010000000B /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		A1B2C3D41E0000010000000D /* MovementPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementPolicy.swift; sourceTree = "<group>"; };
+		A1B2C3D41E0000010000000F /* CheckItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckItem.swift; sourceTree = "<group>"; };
+		A1B2C3D41E00000100000012 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		A1B2C3D41E00000100000014 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 /* UI Tests product and sources */
 		A1B2C3D41E00000200000010 /* WasuremonoZeroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WasuremonoZeroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B2C3D41E00000200000004 /* UIScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenshotTests.swift; sourceTree = "<group>"; };
@@ -67,6 +73,9 @@
 				A1B2C3D41E00000100000009 /* NotificationService.swift */,
 				A1B2C3D41E0000010000000B /* LocationService.swift */,
 				A1B2C3D41E0000010000000D /* MovementPolicy.swift */,
+				A1B2C3D41E0000010000000F /* CheckItem.swift */,
+				A1B2C3D41E00000100000012 /* AppSettings.swift */,
+				A1B2C3D41E00000100000014 /* SettingsStore.swift */,
 				A1B2C3D41E00000100000006 /* Assets.xcassets */,
 				A1B2C3D41E00000100000007 /* Info.plist */,
 			);
@@ -197,6 +206,9 @@
 				A1B2C3D41E00000100000008 /* NotificationService.swift in Sources */,
 				A1B2C3D41E0000010000000A /* LocationService.swift in Sources */,
 				A1B2C3D41E0000010000000C /* MovementPolicy.swift in Sources */,
+				A1B2C3D41E0000010000000E /* CheckItem.swift in Sources */,
+				A1B2C3D41E00000100000011 /* AppSettings.swift in Sources */,
+				A1B2C3D41E00000100000013 /* SettingsStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

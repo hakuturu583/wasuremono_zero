@@ -28,7 +28,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 final class AppCoordinator: NSObject {
     private let notificationService: NotificationService
     private let locationService: LocationService
-    private let movementPolicy = MovementPolicy()
+    private let settingsStore: SettingsStore
 
     private var lastNotifiedAt: Date?
     private var lastLocation: CLLocation?
@@ -37,9 +37,11 @@ final class AppCoordinator: NSObject {
     override init() {
         let notificationService = NotificationService()
         let locationService = LocationService()
+        let settingsStore = SettingsStore()
 
         self.notificationService = notificationService
         self.locationService = locationService
+        self.settingsStore = settingsStore
 
         super.init()
         self.locationService.delegate = self
@@ -96,8 +98,14 @@ extension AppCoordinator: LocationServiceDelegate {
     }
 
     private func handleMovementEvent(location: CLLocation) {
+        let settings = settingsStore.load()
+        let policy = MovementPolicy(
+            minimumInterval: TimeInterval(settings.minimumIntervalMinutes * 60),
+            minimumDistance: settings.minimumDistanceMeters
+        )
+
         let now = Date()
-        guard movementPolicy.shouldNotify(
+        guard policy.shouldNotify(
             lastNotifiedAt: lastNotifiedAt,
             lastLocation: lastLocation,
             newLocation: location,
@@ -110,7 +118,7 @@ extension AppCoordinator: LocationServiceDelegate {
         lastLocation = location
 
         Task {
-            await notificationService.scheduleCheckNotification()
+            await notificationService.scheduleCheckNotification(enabledItems: settings.enabledItems)
         }
     }
 }

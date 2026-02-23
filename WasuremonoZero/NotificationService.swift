@@ -16,11 +16,6 @@ struct NotificationAction {
 
 final class NotificationService {
     static let categoryIdentifier = "CHECK_ITEMS"
-
-    static let checkPhoneAction = NotificationAction(identifier: "CHECK_PHONE", title: "け")
-    static let checkWalletAction = NotificationAction(identifier: "CHECK_WALLET", title: "さ")
-    static let checkKeysAction = NotificationAction(identifier: "CHECK_KEYS", title: "キ")
-    static let checkGlassesAction = NotificationAction(identifier: "CHECK_GLASSES", title: "め")
     static let snoozeAction = NotificationAction(identifier: "SNOOZE", title: "後で")
 
     private let notificationCenter: UserNotificationCenterProtocol
@@ -43,15 +38,14 @@ final class NotificationService {
     }
 
     var checkItemsCategory: UNNotificationCategory {
-        let actions = [
-            NotificationService.checkPhoneAction,
-            NotificationService.checkWalletAction,
-            NotificationService.checkKeysAction,
-            NotificationService.checkGlassesAction,
-            NotificationService.snoozeAction
-        ].map {
-            UNNotificationAction(identifier: $0.identifier, title: $0.title)
-        }
+        let actions = CheckItem.allCases.map {
+            UNNotificationAction(identifier: $0.actionIdentifier, title: $0.label)
+        } + [
+            UNNotificationAction(
+                identifier: NotificationService.snoozeAction.identifier,
+                title: NotificationService.snoozeAction.title
+            )
+        ]
 
         return UNNotificationCategory(
             identifier: NotificationService.categoryIdentifier,
@@ -61,10 +55,19 @@ final class NotificationService {
         )
     }
 
-    func scheduleCheckNotification() async {
+    func scheduleCheckNotification(enabledItems: Set<CheckItem>) async {
+        guard enabledItems.isEmpty == false else {
+            return
+        }
+
+        let labels = CheckItem.allCases
+            .filter { enabledItems.contains($0) }
+            .map(\.label)
+            .joined(separator: " / ")
+
         let content = UNMutableNotificationContent()
         content.title = "持ち物チェック"
-        content.body = "け / さ / キ / め を確認してください"
+        content.body = "\(labels) を確認してください"
         content.sound = .default
         content.categoryIdentifier = NotificationService.categoryIdentifier
 
