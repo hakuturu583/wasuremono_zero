@@ -1,0 +1,43 @@
+name: iOS Build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show Xcode
+        run: xcodebuild -version && xcodebuild -showsdks
+
+      - name: Resolve packages (if project exists)
+        if: ${{ hashFiles('**/*.xcodeproj/project.pbxproj') != '' }}
+        run: |
+          PROJECT=$(git ls-files "**/*.xcodeproj/project.pbxproj" | head -n1 | xargs dirname | xargs dirname)
+          xcodebuild -resolvePackageDependencies -project "$PROJECT"
+
+      - name: Build (if project exists)
+        if: ${{ hashFiles('**/*.xcodeproj/project.pbxproj') != '' }}
+        run: |
+          PROJECT=$(git ls-files "**/*.xcodeproj/project.pbxproj" | head -n1 | xargs dirname | xargs dirname)
+          SCHEME=${PROJECT%%.xcodeproj}
+          xcodebuild -scheme "$SCHEME" -destination 'generic/platform=iOS' -configuration Debug -skipPackagePluginValidation build
+
+      - name: Skip build (no project found)
+        if: ${{ hashFiles('**/*.xcodeproj/project.pbxproj') == '' }}
+        run: echo 'No Xcode project found; skipping build.'
+
+      - name: Archive logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs
+          path: |
+            ~/Library/Logs/DiagnosticReports
+          if-no-files-found: ignore
+
