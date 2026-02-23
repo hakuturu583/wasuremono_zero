@@ -10,6 +10,8 @@
 		A1B2C3D41E00000100000001 /* WasuremonoZeroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E00000100000004 /* WasuremonoZeroApp.swift */; };
 		A1B2C3D41E00000100000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E00000100000005 /* ContentView.swift */; };
 		A1B2C3D41E00000100000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E00000100000006 /* Assets.xcassets */; };
+/* UI Tests build file */
+		A1B2C3D41E00000200000001 /* UIScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E00000200000004 /* UIScreenshotTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,10 +20,21 @@
 		A1B2C3D41E00000100000005 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A1B2C3D41E00000100000006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1B2C3D41E00000100000007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* UI Tests product and sources */
+		A1B2C3D41E00000200000010 /* WasuremonoZeroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WasuremonoZeroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B2C3D41E00000200000004 /* UIScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenshotTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A1B2C3D41E00000100000020 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* UI Tests Frameworks */
+		A1B2C3D41E00000200000020 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -35,6 +48,7 @@
 			isa = PBXGroup;
 			children = (
 				A1B2C3D41E00000100000031 /* WasuremonoZero */,
+				A1B2C3D41E00000200000031 /* WasuremonoZeroUITests */,
 				A1B2C3D41E00000100000032 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,8 +68,18 @@
 			isa = PBXGroup;
 			children = (
 				A1B2C3D41E00000100000010 /* WasuremonoZero.app */,
+				A1B2C3D41E00000200000010 /* WasuremonoZeroUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+/* UI Tests Group */
+		A1B2C3D41E00000200000031 /* WasuremonoZeroUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A1B2C3D41E00000200000004 /* UIScreenshotTests.swift */,
+			);
+			path = WasuremonoZeroUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -78,6 +102,25 @@
 			productReference = A1B2C3D41E00000100000010 /* WasuremonoZero.app */;
 			productType = "com.apple.product-type.application";
 		};
+/* UI Tests target */
+		A1B2C3D41E00000200000040 /* WasuremonoZeroUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1B2C3D41E00000200000050 /* Build configuration list for PBXNativeTarget "WasuremonoZeroUITests" */;
+			buildPhases = (
+				A1B2C3D41E00000200000021 /* Sources */,
+				A1B2C3D41E00000200000020 /* Frameworks */,
+				A1B2C3D41E00000200000022 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1B2C3D41E00000200000081 /* PBXTargetDependency */,
+			);
+			name = WasuremonoZeroUITests;
+			productName = WasuremonoZeroUITests;
+			productReference = A1B2C3D41E00000200000010 /* WasuremonoZeroUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -90,6 +133,10 @@
 				TargetAttributes = {
 					A1B2C3D41E00000100000040 = {
 						CreatedOnToolsVersion = 15.0;
+					};
+					A1B2C3D41E00000200000040 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = A1B2C3D41E00000100000040;
 					};
 				};
 			};
@@ -107,6 +154,7 @@
 			projectRoot = "";
 			targets = (
 				A1B2C3D41E00000100000040 /* WasuremonoZero */,
+				A1B2C3D41E00000200000040 /* WasuremonoZeroUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -117,6 +165,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1B2C3D41E00000100000003 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* UI Tests Resources */
+		A1B2C3D41E00000200000022 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,7 +188,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+/* UI Tests Sources */
+		A1B2C3D41E00000200000021 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1B2C3D41E00000200000001 /* UIScreenshotTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXContainerItemProxy section */
+		A1B2C3D41E00000200000080 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1B2C3D41E00000100000060 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1B2C3D41E00000100000040;
+			remoteInfo = WasuremonoZero;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXTargetDependency section */
+		A1B2C3D41E00000200000081 /* PBXTargetDependency */ = {isa = PBXTargetDependency; target = A1B2C3D41E00000100000040 /* WasuremonoZero */; targetProxy = A1B2C3D41E00000200000080 /* PBXContainerItemProxy */; };
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A1B2C3D41E00000100000070 /* Debug */ = {
@@ -252,9 +331,9 @@
 			};
 			name = Debug;
 		};
-		A1B2C3D41E00000100000073 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
+			A1B2C3D41E00000100000073 /* Release */ = {
+				isa = XCBuildConfiguration;
+				buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -295,9 +374,48 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				};
+				name = Release;
 			};
-			name = Release;
-		};
+			/* UI Tests build configurations */
+			A1B2C3D41E00000200000070 /* Debug */ = {
+				isa = XCBuildConfiguration;
+				buildSettings = {
+					ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+					BUNDLE_LOADER = "";
+					CODE_SIGN_STYLE = Automatic;
+					DEVELOPMENT_TEAM = "";
+					GENERATE_INFOPLIST_FILE = YES;
+					IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+					MARKETING_VERSION = 1.0;
+					PRODUCT_BUNDLE_IDENTIFIER = com.example.WasuremonoZeroUITests;
+					PRODUCT_NAME = "$(TARGET_NAME)";
+					SDKROOT = iphoneos;
+					SWIFT_VERSION = 5.0;
+					TARGETED_DEVICE_FAMILY = "1,2";
+					TEST_TARGET_NAME = WasuremonoZero;
+				};
+				name = Debug;
+			};
+			A1B2C3D41E00000200000071 /* Release */ = {
+				isa = XCBuildConfiguration;
+				buildSettings = {
+					ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+					BUNDLE_LOADER = "";
+					CODE_SIGN_STYLE = Automatic;
+					DEVELOPMENT_TEAM = "";
+					GENERATE_INFOPLIST_FILE = YES;
+					IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+					MARKETING_VERSION = 1.0;
+					PRODUCT_BUNDLE_IDENTIFIER = com.example.WasuremonoZeroUITests;
+					PRODUCT_NAME = "$(TARGET_NAME)";
+					SDKROOT = iphoneos;
+					SWIFT_VERSION = 5.0;
+					TARGETED_DEVICE_FAMILY = "1,2";
+					TEST_TARGET_NAME = WasuremonoZero;
+				};
+				name = Release;
+			};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -310,15 +428,25 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A1B2C3D41E00000100000061 /* Build configuration list for PBXProject "WasuremonoZero" */ = {
-			isa = XCConfigurationList;
+			A1B2C3D41E00000100000061 /* Build configuration list for PBXProject "WasuremonoZero" */ = {
+				isa = XCConfigurationList;
 			buildConfigurations = (
 				A1B2C3D41E00000100000072 /* Debug */,
 				A1B2C3D41E00000100000073 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
+				defaultConfigurationName = Release;
+			};
+			/* UI Tests configuration list */
+			A1B2C3D41E00000200000050 /* Build configuration list for PBXNativeTarget "WasuremonoZeroUITests" */ = {
+				isa = XCConfigurationList;
+				buildConfigurations = (
+					A1B2C3D41E00000200000070 /* Debug */,
+					A1B2C3D41E00000200000071 /* Release */,
+				);
+				defaultConfigurationIsVisible = 0;
+				defaultConfigurationName = Release;
+			};
 /* End XCConfigurationList section */
 	};
 	rootObject = A1B2C3D41E00000100000060 /* Project object */;

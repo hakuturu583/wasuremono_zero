@@ -34,6 +34,33 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             build
 
+      - name: Run UI tests (iPhone 15)
+        run: |
+          xcodebuild \
+            -project WasuremonoZero.xcodeproj \
+            -scheme WasuremonoZero \
+            -destination 'platform=iOS Simulator,name=iPhone 15' \
+            -skipPackagePluginValidation \
+            -resultBundlePath TestResults.xcresult \
+            test
+
+      - name: Export test attachments
+        if: always()
+        run: |
+          mkdir -p TestResultsExport
+          xcrun xcresulttool export --type directory --path TestResults.xcresult --output-path TestResultsExport || true
+          echo "Listing exported attachments:" && ls -R TestResultsExport || true
+
+      - name: Upload UI test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-test-results
+          path: |
+            TestResults.xcresult
+            TestResultsExport
+          if-no-files-found: warn
+
       - name: Archive build logs
         if: always()
         uses: actions/upload-artifact@v4
