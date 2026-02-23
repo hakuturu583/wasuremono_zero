@@ -4,7 +4,6 @@ import UserNotifications
 protocol UserNotificationCenterProtocol {
     func requestAuthorization(options: UNAuthorizationOptions) async throws -> Bool
     func setNotificationCategories(_ categories: Set<UNNotificationCategory>)
-    func add(_ request: UNNotificationRequest) async throws
 }
 
 extension UNUserNotificationCenter: UserNotificationCenterProtocol {}
@@ -29,25 +28,8 @@ final class NotificationService {
         self.notificationCenter = notificationCenter
     }
 
-    func configure() {
-        let actions = [
-            NotificationService.checkPhoneAction,
-            NotificationService.checkWalletAction,
-            NotificationService.checkKeysAction,
-            NotificationService.checkGlassesAction,
-            NotificationService.snoozeAction
-        ].map {
-            UNNotificationAction(identifier: $0.identifier, title: $0.title)
-        }
-
-        let category = UNNotificationCategory(
-            identifier: NotificationService.categoryIdentifier,
-            actions: actions,
-            intentIdentifiers: [],
-            options: []
-        )
-
-        notificationCenter.setNotificationCategories([category])
+    func configureCategories() {
+        notificationCenter.setNotificationCategories([checkItemsCategory])
     }
 
     @discardableResult
@@ -59,20 +41,22 @@ final class NotificationService {
         }
     }
 
-    func scheduleChecklistNotification(after delay: TimeInterval = 1.0) async {
-        let content = UNMutableNotificationContent()
-        content.title = "持ち物チェック"
-        content.body = "け/さ/キ/め を確認してください"
-        content.sound = .default
-        content.categoryIdentifier = NotificationService.categoryIdentifier
-
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: max(delay, 1.0), repeats: false)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
-        do {
-            try await notificationCenter.add(request)
-        } catch {
-            // noop: notification scheduling failures are non-fatal for app start
+    var checkItemsCategory: UNNotificationCategory {
+        let actions = [
+            NotificationService.checkPhoneAction,
+            NotificationService.checkWalletAction,
+            NotificationService.checkKeysAction,
+            NotificationService.checkGlassesAction,
+            NotificationService.snoozeAction
+        ].map {
+            UNNotificationAction(identifier: $0.identifier, title: $0.title)
         }
+
+        return UNNotificationCategory(
+            identifier: NotificationService.categoryIdentifier,
+            actions: actions,
+            intentIdentifiers: [],
+            options: []
+        )
     }
 }

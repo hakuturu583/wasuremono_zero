@@ -8,8 +8,7 @@ struct WasuremonoZeroApp: App {
         WindowGroup {
             ContentView()
                 .task {
-                    notificationService.configure()
-                    _ = await notificationService.requestAuthorization()
+                    notificationService.configureCategories()
                 }
         }
     }
