@@ -19,8 +19,20 @@ jobs:
       - name: Resolve packages
         run: xcodebuild -resolvePackageDependencies -project WasuremonoZero.xcodeproj
 
+      - name: Show project schemes
+        run: xcodebuild -list -project WasuremonoZero.xcodeproj
+
       - name: Build
-        run: xcodebuild -scheme WasuremonoZero -destination 'generic/platform=iOS' -configuration Debug -skipPackagePluginValidation build
+        run: |
+          xcodebuild \
+            -project WasuremonoZero.xcodeproj \
+            -scheme WasuremonoZero \
+            -destination 'generic/platform=iOS' \
+            -configuration Debug \
+            -skipPackagePluginValidation \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            build
 
       - name: Archive build logs
         if: always()
