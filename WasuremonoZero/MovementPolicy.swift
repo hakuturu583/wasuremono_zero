@@ -11,16 +11,19 @@ struct MovementPolicy {
         newLocation: CLLocation,
         now: Date = Date()
     ) -> Bool {
-        if let lastNotifiedAt,
-           now.timeIntervalSince(lastNotifiedAt) < minimumInterval {
+        guard let lastLocation else {
+            return true
+        }
+
+        let movedDistance = newLocation.distance(from: lastLocation)
+        if movedDistance >= minimumDistance {
+            return true
+        }
+
+        guard let lastNotifiedAt else {
             return false
         }
 
-        if let lastLocation,
-           newLocation.distance(from: lastLocation) < minimumDistance {
-            return false
-        }
-
-        return true
+        return now.timeIntervalSince(lastNotifiedAt) >= minimumInterval
     }
 }
