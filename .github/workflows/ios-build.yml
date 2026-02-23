@@ -2,8 +2,9 @@ name: iOS Build
 
 on:
   push:
+    branches:
+      - "**"
   pull_request:
-  workflow_dispatch:
 
 jobs:
   build:
@@ -15,29 +16,30 @@ jobs:
       - name: Show Xcode
         run: xcodebuild -version && xcodebuild -showsdks
 
-      - name: Resolve packages (if project exists)
-        if: ${{ hashFiles('**/*.xcodeproj/project.pbxproj') != '' }}
+      - name: Resolve packages
+        run: xcodebuild -resolvePackageDependencies -project WasuremonoZero.xcodeproj
+
+      - name: Show project schemes
+        run: xcodebuild -list -project WasuremonoZero.xcodeproj
+
+      - name: Build
         run: |
-          PROJECT=$(git ls-files "**/*.xcodeproj/project.pbxproj" | head -n1 | xargs dirname | xargs dirname)
-          xcodebuild -resolvePackageDependencies -project "$PROJECT"
+          xcodebuild \
+            -project WasuremonoZero.xcodeproj \
+            -scheme WasuremonoZero \
+            -destination 'generic/platform=iOS' \
+            -configuration Debug \
+            -skipPackagePluginValidation \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            build
 
-      - name: Build (if project exists)
-        if: ${{ hashFiles('**/*.xcodeproj/project.pbxproj') != '' }}
-        run: |
-          PROJECT=$(git ls-files "**/*.xcodeproj/project.pbxproj" | head -n1 | xargs dirname | xargs dirname)
-          SCHEME=${PROJECT%%.xcodeproj}
-          xcodebuild -scheme "$SCHEME" -destination 'generic/platform=iOS' -configuration Debug -skipPackagePluginValidation build
-
-      - name: Skip build (no project found)
-        if: ${{ hashFiles('**/*.xcodeproj/project.pbxproj') == '' }}
-        run: echo 'No Xcode project found; skipping build.'
-
-      - name: Archive logs
+      - name: Archive build logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: build-logs
           path: |
+            ~/Library/Developer/Xcode/DerivedData/**/Logs/Build
             ~/Library/Logs/DiagnosticReports
-          if-no-files-found: ignore
-
+          if-no-files-found: warn
