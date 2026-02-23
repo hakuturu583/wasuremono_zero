@@ -4,6 +4,7 @@ import UserNotifications
 protocol UserNotificationCenterProtocol {
     func requestAuthorization(options: UNAuthorizationOptions) async throws -> Bool
     func setNotificationCategories(_ categories: Set<UNNotificationCategory>)
+    func add(_ request: UNNotificationRequest) async throws
 }
 
 extension UNUserNotificationCenter: UserNotificationCenterProtocol {}
@@ -58,5 +59,25 @@ final class NotificationService {
             intentIdentifiers: [],
             options: []
         )
+    }
+
+    func scheduleCheckNotification() async {
+        let content = UNMutableNotificationContent()
+        content.title = "持ち物チェック"
+        content.body = "け / さ / キ / め を確認してください"
+        content.sound = .default
+        content.categoryIdentifier = NotificationService.categoryIdentifier
+
+        let request = UNNotificationRequest(
+            identifier: UUID().uuidString,
+            content: content,
+            trigger: nil
+        )
+
+        do {
+            try await notificationCenter.add(request)
+        } catch {
+            return
+        }
     }
 }
